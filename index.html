@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>JQuery</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
+    </head>
+    <body>
+        <div class="container">
+            <h1>JQuery - Ajax - Catalogue</h1>
+            <div id="catalogue" class="row">
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="vendor/components/jquery/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"></script>
+        <script src="vendor/components/popper/1.14.7/popper.min.js" integrity="sha384-rcuVSwZ3yUEqHm2EP8t4JJ/C0sJiCBmBj8AvbDgymQZIkzaOyZ92TQeqTF+49Bi1" crossorigin="anonymous"></script>
+        <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script>
+            function addCard($img_src, $title, $text, $btn_label, $a_href)
+            {
+                var $card = $('<div class="card col-6 col-md-4 col-lg-3 m-2" />');
+                var $img = $('<img src="' + $img_src + '" class="card-img-top" alt="image">');
+                var $card_body = $('<div class="card-body" />');
+                var $card_title = $('<h5 class="card-title">' + $title + '</h5>');
+                var $card_text = $('<p class="card-text">' + $text + '</p>');
+                var $card_button = $('<a href="' + $a_href + '" class="btn btn-outline-secondary">' + $btn_label + '</a>');
+                
+                $card_body.append($card_title, $card_text, $card_button);
+                $card.append($img, $card_body);
+                $("#catalogue").append($card);
+            }
+
+            $(document).ready(function(){
+
+                $.ajax({
+                    url : 'http://localhost/dwwm-09-jquery-05-ajax-02-catalogue/ajax.php',
+                    success : function(data){
+                        $.each(data.items, function(index,item){
+                            addCard(
+                                item.img_src,
+                                item.title,
+                                item.text,
+                                item.btn_label,
+                                item.a_href
+
+                            );
+                        })
+                    }
+                });
+                var $img_src = 'images/hero.png';
+                var $title = 'Chaton très mignon';
+                var $text = 'Bla bla bla ...';
+                var $btn_label = 'Adopter';
+                var $a_href = '#';
+                addCard($img_src, $title, $text, $btn_label, $a_href);
+                $img_src = 'images/hero.png';
+                $title = "Un autre chaton";
+                $btn_label = 'Partager';
+                addCard($img_src, $title, $text, $btn_label, $a_href);
+                addCard('images/hero.png', 'Chaton très mignon','balbla');
+                addCard('images/hero.png','je suis la','blablabla','ok','ici');
+        
+            });
+        </script>
+    </body>
+</html>

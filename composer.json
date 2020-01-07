@@ -1,0 +1,19 @@
+{
+    "name": "dwwm/jquery",
+    "description": "JQuery example",
+    "type": "project",
+    "require": {
+        "twbs/bootstrap": "^4.3",
+        "components/jquery": "^3.3"
+    },
+    "license": "GPL 3.0",
+    "authors": [
+        {
+            "name": "Yann Labonne",
+            "email": "yann.labonne@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4" : { "Valarep \\": "./"}
+    }
+}
